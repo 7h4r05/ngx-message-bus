@@ -1,0 +1,43 @@
+{
+  "name": "ngx-message-bus",
+  "version": "1.0.0",
+  "description": "Messaging system for angular 2/4/5 application. It allows communication between components and modules. Direct messages, messages by types and broadcasting.",
+  "main": "dist/index.js",
+  "typings": "definitions/index",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7h4r05/ngx-message-bus.git"
+  },
+  "keywords": [
+    "angular2",
+    "message",
+    "bus",
+    "queue"
+  ],
+  "author": "Dariusz Zabrzeński",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/7h4r05/ngx-message-bus/issues"
+  },
+  "homepage": "https://github.com/7h4r05/ngx-message-bus#readme",
+  "devDependencies": {
+    "@types/node": "~6.0.46"
+  },
+  "dependencies": {
+    "@angular/core": "^4.3.1",
+    "rxjs": "^5.4.2",
+    "gulp": "^3.9.1",
+    "@types/es6-shim": "^0.31.32",
+    "gulp-clean": "^0.3.2",
+    "gulp-typescript": "^3.1.3",
+    "jasmine": "^2.5.2",
+    "merge2": "^1.0.2",
+    "rimraf": "~2.5.4",
+    "run-sequence": "^1.2.2",
+    "standard-version": "^3.0.0",
+    "tslint": "~3.15.1",
+    "tslint-microsoft-contrib": "~2.0.13",
+    "typescript": "^2.3.4",
+    "zone.js": "^0.8.14"
+  }
+}

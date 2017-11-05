@@ -1,0 +1,19 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "module" :"commonjs",
+      "outDir": "./dist/",
+      "sourceMap": true,
+      "declaration": true,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "es6",
+      "types": ["node"]
+    },
+    "include": [
+        "index.ts",
+        "src/**/*"
+      ]
+  }
+  
