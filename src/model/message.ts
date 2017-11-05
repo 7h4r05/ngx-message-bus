@@ -1,4 +1,4 @@
-export interface IMessage<T>{
+export interface Message<T>{
     payload: T;
     groupId: string;
     recipentIds: string[];

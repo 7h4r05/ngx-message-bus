@@ -1,12 +1,9 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { IConnection }  from '../interfaces/connection.interface';
-import { IMessage } from '../interfaces/message.interface';
+import { Message } from '../model/message';
 import { Hub } from '../hub';
-import { ISubscription } from '../interfaces/subscription.interface';
-import { IListener } from '../interfaces/listener.interface';
+import { Subscription } from '../model/subscription';
+import { Listener } from '../model/listener';
 
-export class MessageBusConnection implements IConnection{
+export class Connection{
     private subscriberId: string;
     private hub: Hub;
 
@@ -23,7 +20,7 @@ export class MessageBusConnection implements IConnection{
         return this.subscriberId.toString();
     }
 
-    off<T>(subscription: ISubscription<T>){
+    off<T>(subscription: Subscription<T>){
         this.hub.removeListener(this.subscriptionToListener(subscription));
     }
 
@@ -31,7 +28,7 @@ export class MessageBusConnection implements IConnection{
         this.hub.removeBroadcastListener(this.getSubscriberId());
     }
 
-    on<T>(subscription: ISubscription<T>){
+    on<T>(subscription: Subscription<T>){
         this.hub.addListener(this.subscriptionToListener(subscription));
     }
 
@@ -43,14 +40,14 @@ export class MessageBusConnection implements IConnection{
         });
     }
 
-    post<T>(message: IMessage<T>){
+    post<T>(message: Message<T>){
         message.publisherId = this.subscriberId;
         message.timeGenerated = new Date();
         this.hub.post(message);
     }
 
     broadcast<T>(data: T){
-        const message:IMessage<T> = {
+        const message:Message<T> = {
             publisherId: this.subscriberId,
             payload: data,
             timeGenerated: new Date(),
@@ -61,7 +58,7 @@ export class MessageBusConnection implements IConnection{
         this.hub.broadcast(message);
     }
 
-    private subscriptionToListener<T>(subscription: ISubscription<T>):IListener{
+    private subscriptionToListener<T>(subscription: Subscription<T>):Listener{
         return {
             subscriberId: this.getSubscriberId(),
             groupId: subscription.groupId,

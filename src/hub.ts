@@ -1,15 +1,15 @@
-import { IConnection } from './interfaces/connection.interface';
-import { IMessage } from './interfaces/message.interface';
-import { IListener } from './interfaces/listener.interface';
+import { Connection } from './model/connection';
+import { Message } from './model/message';
+import { Listener } from './model/listener';
 
 
 export class Hub{
     
         private hubName: string;
     
-        private subscribers: IConnection[];
-        private listeners: IListener[];
-        private broadcastListeners: IListener[];
+        private subscribers: Connection[];
+        private listeners: Listener[];
+        private broadcastListeners: Listener[];
     
         constructor(hubName: string){
             this.subscribers = [];
@@ -18,12 +18,12 @@ export class Hub{
             this.hubName = hubName;
         }
 
-        connect(connection: IConnection){
+        connect(connection: Connection){
 
             this.subscribers.push(connection);
         }
 
-        disconnect(connection: IConnection){
+        disconnect(connection: Connection){
             if(!this.subscribers || this.subscribers.length === 0){
                 return;
             }
@@ -50,19 +50,19 @@ export class Hub{
             return this.subscribers.length;
         }
         
-        addListener(listener: IListener){
+        addListener(listener: Listener){
             if(!this.listeners.find(l => l.subscriberId.toString() === listener.subscriberId.toString() && l.groupId.toString() === listener.groupId.toString())){
                 this.listeners.push(listener);
             }
         }
 
-        addBroadcastListener(listener: IListener){
+        addBroadcastListener(listener: Listener){
             if(!this.broadcastListeners.find(l => l.subscriberId.toString() === listener.subscriberId.toString())){
                 this.broadcastListeners.push(listener);
             }
         }
 
-        removeListener(listener: IListener){
+        removeListener(listener: Listener){
             if(!this.isAnyListener()){
                 return;
             }
@@ -87,7 +87,7 @@ export class Hub{
             return this.hubName;
         }
 
-        post<T>(message: IMessage<T>){
+        post<T>(message: Message<T>){
             if(!this.isAnyListener() && message){
                 return;
             }
@@ -109,7 +109,7 @@ export class Hub{
             recipents.forEach(recipent => recipent.callback(message.payload));
         }
 
-        broadcast<T>(message: IMessage<T>){
+        broadcast<T>(message: Message<T>){
             if(!this.isAnyBroadcastListener()){
                 return;
             }

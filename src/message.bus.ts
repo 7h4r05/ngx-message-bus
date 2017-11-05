@@ -1,7 +1,5 @@
-import { IConnection } from './interfaces/connection.interface';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { IMessage } from './interfaces/message.interface';
-import { MessageBusConnection } from './implementation/message-bus.connection';
+import { Connection } from './model/connection';
+import { Message } from './model/message';
 import { Hub } from './hub';
 
 interface Map{
@@ -16,18 +14,18 @@ export class MessageBus{
         this.hubs = {};
     }
 
-    connect(hubName: string, subscriberId: string):IConnection{
+    connect(hubName: string, subscriberId: string):Connection{
         hubName = hubName.toString();
         if(!this.hubs[hubName] || this.hubs[hubName] === null){
             this.hubs[hubName] = new Hub(hubName);
         }
         const hub = this.hubs[hubName];
-        const connection = new MessageBusConnection(hub, subscriberId);
+        const connection = new Connection(hub, subscriberId);
         hub.connect(connection);
         return connection;
     }
 
-    disconnect(connection: IConnection){
+    disconnect(connection: Connection){
         if(!connection || connection == null){
             return;
         }
