@@ -1,7 +1,7 @@
-import { Message } from '../model/message';
-import { Hub } from '../hub';
-import { Subscription } from '../model/subscription';
-import { Listener } from '../model/listener';
+import { Message } from './message';
+import { Hub } from './hub';
+import { Subscription } from './subscription';
+import { Listener } from './listener';
 
 export class Connection{
     private subscriberId: string;

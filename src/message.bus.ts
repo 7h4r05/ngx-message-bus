@@ -1,5 +1,5 @@
-import { Connection } from './model/connection';
-import { Message } from './model/message';
+import { Connection } from './connection';
+import { Message } from './message';
 import { Hub } from './hub';
 
 interface Map{

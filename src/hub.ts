@@ -1,6 +1,6 @@
-import { Connection } from './model/connection';
-import { Message } from './model/message';
-import { Listener } from './model/listener';
+import { Connection } from './connection';
+import { Message } from './message';
+import { Listener } from './listener';
 
 
 export class Hub{
