@@ -8,8 +8,7 @@ Provides:
  - bulk messaging by type within hubs
  - broadcasting messages within hubs
 
-
-#### How to configure
+# Usage
 
 ## Import Module
 Initialize module in the core of your application
@@ -26,7 +25,7 @@ import  { MessageBusModule } from 'ngx-message-bus';
 ```
 ## Managing the connection
 
-# Open the connection
+#### Open the connection
 
 Opens the connection to hub and stores Connection object allowing listening, broadcasting and posting messages. 
 ```ts
@@ -38,7 +37,7 @@ ngOnInit(){
 
 ```
 
-# Closing connection
+#### Closing connection
 
 Closes the connection. Remove the subscriber from hub and kills all listeners.
 ```ts
@@ -48,10 +47,9 @@ ngOnDestroy(){
 
 ```
 
+## Listening for messages
 
-### Listening for messages
-
-# Start listening for messages
+#### Start listening for messages
 To start listening for a specific type of message create a subscription object and pass it to 'on' method. Each time the message arrives to the group or to the subscriber the 'handleMessage' method will be called.
 ```ts
 const subscription = {
@@ -63,7 +61,7 @@ this.myConnection.on(subscription);
 ```
 
 
-# Stop listening to messages
+#### Stop listening to messages
 ```ts
  const subscription= {
     groupId: this.type,
@@ -72,22 +70,22 @@ this.myConnection.on(subscription);
 this.hubConnection.off(subscription);
 ```
 
-# Listen for broadcasts
+#### Listen for broadcasts
 
 Broadcast messages require only callback function to be passed
 
 ```ts
 this.myConnection.onBroadcast(this.handleBroadcast.bind(this));
 ```
-# Stop listening for broadcasts
+#### Stop listening for broadcasts
 
 ```ts
 this.myConnection.offBroadcast();
 ```
 
-### Posting messages
+## Posting messages
 
-# Post message
+#### Post message
 
 To post a message, a Message object needs to be created.
 
@@ -112,10 +110,10 @@ this.myConnection.post(message);
 
 Targets all listeners in 'XYZ' group within the hub.
 
-# Broadcasting message
+#### Broadcasting message
 
 To broadcast a message simple data needs to be passed
 
-``ts
+```ts
    this.myConnection.broadcast({//... some data});
-``
+```
