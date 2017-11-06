@@ -1,6 +1,6 @@
 {
   "name": "ngx-message-bus",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Messaging system for angular 2/4/5 application. It allows communication between components and modules. Direct messages, messages by types and broadcasting.",
   "main": "dist/index.js",
   "typings": "definitions/index",
