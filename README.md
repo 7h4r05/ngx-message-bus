@@ -10,16 +10,16 @@ Provides:
 
 # Usage
 
-## Import Module
-Initialize module in the core of your application
+## Import Provider
+Initialize provider in core module of your application
 
 ```ts
-import  { MessageBusModule } from 'ngx-message-bus';
+import  { MessageBus } from 'ngx-message-bus';
 
 @NgModule({
-    imports: [
+    providers: [
         //...,
-        MessageBusModule
+        MessageBus
     ]
 })
 ```

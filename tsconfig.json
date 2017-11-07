@@ -1,19 +1,34 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-      "module" :"commonjs",
-      "outDir": "./dist/",
-      "sourceMap": true,
-      "declaration": true,
-      "moduleResolution": "node",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "target": "es6",
-      "types": ["node"]
-    },
-    "include": [
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "types": [
+      "node"
+    ],
+    "lib": ["es6", "dom"]
+  },
+    "files": [
         "index.ts",
-        "src/**/*"
-      ]
+        "src/connection.ts",
+        "src/hub.ts",
+        "src/listener.ts",
+        "src/message.ts",
+        "src/subscription.ts",
+        "src/message.bus.ts"
+      ],
+      "exclude":[
+        "node_modules",
+        "bundles"
+      ],
+      "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true
+      }
   }
   

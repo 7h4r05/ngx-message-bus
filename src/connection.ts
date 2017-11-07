@@ -1,38 +1,38 @@
-import { Message } from './message';
-import { Hub } from './hub';
-import { Subscription } from './subscription';
-import { Listener } from './listener';
+import { Message } from "./message";
+import { Hub } from "./hub";
+import { Subscription } from "./subscription";
+import { Listener } from "./listener";
 
-export class Connection{
+export class Connection {
     private subscriberId: string;
     private hub: Hub;
 
-    constructor(hub: Hub, subscriberId: string){
+    constructor(hub: Hub, subscriberId: string) {
         this.hub = hub;
         this.subscriberId = subscriberId;
     }
 
-    getHubName():string{
+    getHubName(): string {
         return this.hub.getHubName();
     }
 
-    getSubscriberId(): string{
+    getSubscriberId(): string {
         return this.subscriberId.toString();
     }
 
-    off<T>(subscription: Subscription<T>){
+    off<T>(subscription: Subscription<T>): void {
         this.hub.removeListener(this.subscriptionToListener(subscription));
     }
 
-    offBroadcast<T>(){
+    offBroadcast(): void {
         this.hub.removeBroadcastListener(this.getSubscriberId());
     }
 
-    on<T>(subscription: Subscription<T>){
+    on<T>(subscription: Subscription<T>): void {
         this.hub.addListener(this.subscriptionToListener(subscription));
     }
 
-    onBroadcast<T>(callBack: (payload: any) => void){
+    onBroadcast(callBack: (payload: any) => void): void {
         this.hub.addBroadcastListener({
             subscriberId: this.subscriberId,
             callback: callBack,
@@ -40,13 +40,13 @@ export class Connection{
         });
     }
 
-    post<T>(message: Message<T>){
+    post<T>(message: Message<T>): void {
         message.publisherId = this.subscriberId;
         message.timeGenerated = new Date();
         this.hub.post(message);
     }
 
-    broadcast<T>(data: T){
+    broadcast<T>(data: T): void {
         const message:Message<T> = {
             publisherId: this.subscriberId,
             payload: data,
@@ -58,7 +58,7 @@ export class Connection{
         this.hub.broadcast(message);
     }
 
-    private subscriptionToListener<T>(subscription: Subscription<T>):Listener{
+    private subscriptionToListener<T>(subscription: Subscription<T>):Listener {
         return {
             subscriberId: this.getSubscriberId(),
             groupId: subscription.groupId,
