@@ -28,13 +28,13 @@ export class MessageBus {
         if(!connection || connection == null) {
             return;
         }
-
-        let hub: Hub = this.hubs[connection.getHubName().toString()];
+        const hubName = connection.getHubName().toString();
+        let hub: Hub = this.hubs[hubName];
         if(hub) {
             hub.disconnect(connection);
             if(hub.getActiveConnections() < 1) {
                 hub.dispose();
-                this.hubs[connection.getHubName()] = null;
+                this.hubs[hubName] = null;
             }
         }
     }
