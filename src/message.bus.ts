@@ -28,7 +28,7 @@ export class MessageBus {
         if(!connection || connection == null) {
             return;
         }
-        const hubName = connection.getHubName().toString();
+        const hubName:string = connection.getHubName().toString();
         let hub: Hub = this.hubs[hubName];
         if(hub) {
             hub.disconnect(connection);
