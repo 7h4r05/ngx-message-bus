@@ -1,16 +1,20 @@
 # ngx-message-bus
-> Message Bus for Angular 4+ for communication betweenc omponents.
+
+> Message Bus for Angular 6+ for communication between components.
+
+For Angular versions before 6, you need to choose a 1.x version of this module.
 
 Provides:
- - creation of virtual hubs
- - communication within hubs across whole application
- - direct messaging within hubs
- - bulk messaging by type within hubs
- - broadcasting messages within hubs
 
-# Usage
+- creation of virtual hubs
+- communication within hubs across whole application
+- direct messaging within hubs
+- bulk messaging by type within hubs
+- broadcasting messages within hubs
 
-## Import Provider
+## Usage
+
+### Import Provider
 Initialize provider in core module of your application
 
 ```ts
@@ -23,11 +27,13 @@ import  { MessageBus } from 'ngx-message-bus';
     ]
 })
 ```
-## Managing the connection
+
+### Managing the connection
 
 #### Open the connection
 
-Opens the connection to hub and stores Connection object allowing listening, broadcasting and posting messages. 
+Opens the connection to hub and stores Connection object allowing listening, broadcasting and posting messages.
+
 ```ts
 
 ngOnInit(){
@@ -40,6 +46,7 @@ ngOnInit(){
 #### Closing connection
 
 Closes the connection. Remove the subscriber from hub and kills all listeners.
+
 ```ts
 ngOnDestroy(){
     this.messageBus.disconnect(this.myConnection);
@@ -47,10 +54,12 @@ ngOnDestroy(){
 
 ```
 
-## Listening for messages
+### Listening for messages
 
 #### Start listening for messages
+
 To start listening for a specific type of message create a subscription object and pass it to 'on' method. Each time the message arrives to the group or to the subscriber the 'handleMessage' method will be called.
+
 ```ts
 const subscription = {
     groupId: messageTypeId,
@@ -60,8 +69,8 @@ this.myConnection.on(subscription);
 
 ```
 
-
 #### Stop listening to messages
+
 ```ts
  const subscription= {
     groupId: this.type,
@@ -77,13 +86,14 @@ Broadcast messages require only callback function to be passed
 ```ts
 this.myConnection.onBroadcast(this.handleBroadcast.bind(this));
 ```
+
 #### Stop listening for broadcasts
 
 ```ts
 this.myConnection.offBroadcast();
 ```
 
-## Posting messages
+### Posting messages
 
 #### Post message
 
@@ -99,6 +109,7 @@ To post a message, a Message object needs to be created.
 ```
 
 All recipents with ids: 1,2,3 and listening to group 'XYZ' will receive the message. RecipentIds and groupId is optional. If one is not defined then 'any' is assumed. For example:
+
 ```ts
  const message = {
     recipentIds: null,
