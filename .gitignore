@@ -19,3 +19,7 @@ node_modules
 
 dist
 definitions
+bundles/
+dist/
+dist.tgz
+package-lock.json
