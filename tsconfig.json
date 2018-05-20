@@ -14,14 +14,7 @@
     "lib": ["es6", "dom"]
   },
     "files": [
-        "index.ts",
-        "src/connection.ts",
-        "src/hub.ts",
-        "src/listener.ts",
-        "src/message.ts",
-        "src/subscription.ts",
-        "src/message.bus.ts",
-        "public_api.ts"
+        "./public_api.ts"
       ],
       "exclude":[
         "node_modules",
