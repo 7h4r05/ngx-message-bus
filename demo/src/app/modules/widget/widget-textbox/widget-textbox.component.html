@@ -1,0 +1,14 @@
+
+<div style="width: 33%; margin-top: 15px; margin-bottom: 15px;border: 1px solid;">
+    <div>
+        ID: {{id}} GROUP: {{type}} 
+    </div>
+    <input type="text" [(ngModel)]="value" (change)="changed($event.target.value)"/>
+    <button (click)="on()">ON</button>
+    <button (click)="off()">OFF</button>
+    <button (click)="broadcast()">Broadcast</button>
+
+    <div>
+        Received Payload: {{data}}
+    </div>
+</div>
