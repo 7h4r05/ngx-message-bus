@@ -1,7 +1,7 @@
 export class Message<T>{
     payload: T;
     groupId: string;
-    recipentIds: string[];
+    recipientIds: string[];
     publisherId?: string;
     timeGenerated?: Date;
     metadata?: string;

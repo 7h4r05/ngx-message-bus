@@ -53,7 +53,7 @@ export class Connection {
             timeGenerated: new Date(),
             groupId: null,
             metadata: null,
-            recipentIds: null
+            recipientIds: null
         };
         this.hub.broadcast(message);
     }

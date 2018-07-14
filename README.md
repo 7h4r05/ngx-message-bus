@@ -14,16 +14,16 @@ Provides:
 
 ## Usage
 
-### Import Provider
-Initialize provider in core module of your application
+### Import Module
+Import module 
 
 ```ts
-import  { MessageBus } from 'ngx-message-bus';
+import  { MessageBusModule } from 'ngx-message-bus';
 
 @NgModule({
-    providers: [
+    imports: [
         //...,
-        MessageBus
+        MessageBusModule
     ]
 })
 ```
@@ -101,18 +101,18 @@ To post a message, a Message object needs to be created.
 
 ```ts
  const message = {
-            recipentIds: [1,2,3],
+            recipientIds: [1,2,3],
             payload: { //... some data },
             groupId: 'XYZ'
         };
         this.hubConnection.post(message);
 ```
 
-All recipents with ids: 1,2,3 and listening to group 'XYZ' will receive the message. RecipentIds and groupId is optional. If one is not defined then 'any' is assumed. For example:
+All recipients with ids: 1,2,3 and listening to group 'XYZ' will receive the message. recipientIds and groupId is optional. If one is not defined then 'any' is assumed. For example:
 
 ```ts
  const message = {
-    recipentIds: null,
+    recipientIds: null,
     payload: { //... some data },
     groupId: 'XYZ'
 };
@@ -128,3 +128,31 @@ To broadcast a message simple data needs to be passed
 ```ts
    this.myConnection.broadcast({//... some data});
 ```
+
+### Exception in listener's call back
+By default message bus will catch the exception and print it into the console. There's a possibility to consume the exception with no action (None) or to rethrow the exception.
+
+```ts
+import  { MessageBusModule, ErrorHandlingEnum } from 'ngx-message-bus';
+
+@NgModule({
+    imports: [
+        //...,
+        MessageBusModule.withConfig(ErrorHandlingEnum.Throw)
+    ]
+})
+```
+
+When ErrorHandlingEnum is defined as
+
+```ts
+export declare enum ErrorHandlingEnum {
+    None = 0,
+    Throw = 1,
+    Log = 2,
+}
+```
+
+None = exception is consumed.
+Throw = rethrow the exception. Note: it may break your application.
+Log = print the excpetion into the console.

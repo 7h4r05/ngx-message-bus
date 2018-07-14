@@ -1,6 +1,8 @@
 import { Connection } from "./connection";
 import { Message } from "./message";
 import { Listener } from "./listener";
+import { MessageBusConfig } from "./message-bus.config";
+import { ErrorHandlingEnum } from "../src/error-handling.enum";
 
 export class Hub {
         private hubName: string;
@@ -8,7 +10,8 @@ export class Hub {
         private listeners: Listener[];
         private broadcastListeners: Listener[];
 
-        constructor(hubName: string) {
+        constructor(hubName: string,
+            private messageBusConfig: MessageBusConfig) {
             this.subscribers = [];
             this.listeners = [];
             this.broadcastListeners = [];
@@ -91,22 +94,37 @@ export class Hub {
             if(!this.isAnyListener() && message) {
                 return;
             }
-            let recipents: Listener[] = this.listeners;
+            let recipients: Listener[] = this.listeners;
 
-            if(!message.recipentIds || message.recipentIds.indexOf(message.publisherId.toString()) < 0) {
-                recipents = recipents.filter(l => l.subscriberId.toString() !== message.publisherId.toString());
+            if(!message.recipientIds || message.recipientIds.indexOf(message.publisherId.toString()) < 0) {
+                recipients = recipients.filter(l => l.subscriberId.toString() !== message.publisherId.toString());
             }
-            if(message.recipentIds && message.recipentIds.length > 0) {
-                recipents = recipents.filter(sub => message.recipentIds.indexOf(sub.subscriberId.toString()) >= 0);
+            if(message.recipientIds && message.recipientIds.length > 0) {
+                recipients = recipients.filter(sub => message.recipientIds.indexOf(sub.subscriberId.toString()) >= 0);
             }
             if(message.groupId && message.groupId.length > 0) {
-                recipents = recipents.filter(sub => sub.groupId.toString() === message.groupId.toString());
+                recipients = recipients.filter(sub => sub.groupId.toString() === message.groupId.toString());
             }
 
-            if(!recipents || recipents.length === 0) {
+            if(!recipients || recipients.length === 0) {
                 return;
             }
-            recipents.forEach(recipent => recipent.callback(message.payload));
+            recipients.forEach(recipient => {
+                try{
+                recipient.callback(message.payload);
+                }catch(e){
+                    switch(this.messageBusConfig.ErrorHandling){
+                        case ErrorHandlingEnum.Log:
+                            console.error(e);
+                            break;
+                        case ErrorHandlingEnum.Throw:
+                            throw e;
+                        case ErrorHandlingEnum.None:
+                        default:
+                            break;
+                    }
+                }
+            });
         }
 
         broadcast<T>(message: Message<T>):void {
