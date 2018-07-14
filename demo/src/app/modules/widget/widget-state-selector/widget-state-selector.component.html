@@ -1,0 +1,27 @@
+<div style="width: 33%; margin-top: 15px; margin-bottom: 15px;border: 1px solid;">
+    <div>
+            ID: {{id}} GROUP: {{type}} 
+        </div>    
+    <button *ngFor="let value of values" (click)="setValue(value)" [ngClass]="{'isSelected': selectedValue==value}">
+        {{value}}
+    </button>
+    <select [(ngModel)]="targetType">
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+    </select>
+    <select [(ngModel)]="targetRecipent">
+        <option [value]="null">Any</option>
+        <option [value]="200">1 tb</option>
+        <option [value]="101">2 sc</option>
+        <option [value]="201">2 tb</option>
+        <option [value]="202">3 tb</option>
+    </select>
+    <button (click)="on()">ON</button>
+    <button (click)="off()">OFF</button>
+    <button (click)="send()">Send</button>
+    <button (click)="broadcast()">Broadcast</button>
+
+    <div>
+        Received Payload: {{data | json}}
+    </div>
+</div>

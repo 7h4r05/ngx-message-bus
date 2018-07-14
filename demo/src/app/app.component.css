@@ -1,0 +1,28 @@
+.main {
+  width: 800px;
+  padding: 20px;
+}
+.messages{
+  border: 1px solid;
+  
+}
+.message > div{
+  display: inline-block;
+}
+
+.messages .date{
+  color: #33AA33;
+  width: 5%;
+}
+.messages .author{
+  color: #662266;
+  width: 3%;
+}
+.messages .author.self-author{
+  color: #327777;
+  width: 3%;
+}
+
+.messages .body{
+  width: 50%;
+}
