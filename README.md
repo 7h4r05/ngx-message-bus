@@ -1,7 +1,8 @@
 # ngx-message-bus
 
-> Message Bus for Angular 6+ for communication between components.
+> Message Bus for Angular 7+ for communication between components.
 
+For Angular version 6.x, you need to choose 3.0.0 version.
 For Angular versions before 6, you need to choose a 1.x version of this module.
 
 Provides:
