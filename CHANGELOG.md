@@ -1,3 +1,9 @@
+<a name="7.0.0"></a>
+## [7.0.0] (2018-07-14)
+
+* Updated dependencies to use Angular 7.x
+* Changed version to match Angular latest release
+
 <a name="3.0.0"></a>
 ## [3.0.0] (2018-07-14)
 

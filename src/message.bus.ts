@@ -14,7 +14,6 @@ export class MessageBus {
 
     constructor(private messageBusConfig: MessageBusConfig) {
         this.hubs = {};
-        console.log('message bus constructed');
     }
 
     connect(hubName: string, subscriberId: string):Connection {
