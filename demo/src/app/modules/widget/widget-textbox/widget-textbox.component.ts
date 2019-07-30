@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MessageBus, Connection }  from 'ngx-message-bus';
+import { MessageBus, Connection }  from '../../../../../../public_api';
 
 import { IWidget } from '../iwidget.interface';
 

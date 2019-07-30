@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageBus, Connection, Subscription } from 'ngx-message-bus';
+import { MessageBus, Connection, Message } from '../../../../../../public_api';
 import { IWidget} from '../iwidget.interface';
+
 
 @Component({
     selector: 'widget-state-selector',
@@ -70,14 +71,15 @@ export class WidgetStateSelectorComponent implements IWidget{
     }
 
     send(){
-        const message = {
-            recipentIds: null,
+        const message:Message<any> = {
+            recipientIds: null,
             payload: this.selectedValue,
             groupId: this.targetType
         };
+        
 
         if(this.targetRecipent && this.targetRecipent.length >0 && this.targetRecipent != "null"){
-            message.recipentIds = [ this.targetRecipent];
+            message.recipientIds = [ this.targetRecipent];
         }
         this.hubConnection.post(message);
     }

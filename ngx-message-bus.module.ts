@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MessageBus } from './src/message.bus';
 import { ErrorHandlingEnum } from './src/error-handling.enum';
 import { MessageBusConfig } from './src/message-bus.config';
-import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
+import { ModuleWithProviders } from '@angular/core';
 
 export * from "./src/connection";
 export * from "./src/hub";
