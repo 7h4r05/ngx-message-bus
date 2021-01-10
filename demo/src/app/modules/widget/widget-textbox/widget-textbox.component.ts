@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MessageBus, Connection }  from '../../../../../../public_api';
+import { MessageBus, Connection }  from '../../../../../../dist';
 
 import { IWidget } from '../iwidget.interface';
 
@@ -15,7 +15,7 @@ export class WidgetTextboxComponent implements IWidget{
     data: string;
     hubConnection: Connection;
     constructor(private messageBus: MessageBus){
-
+        
     }
 
     ngOnInit(){

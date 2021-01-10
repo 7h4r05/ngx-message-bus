@@ -1,8 +1,7 @@
+import { ErrorHandlingEnum } from './error-handling.enum';
 import { Connection } from "./connection";
 import { Message } from "./message";
 import { Listener } from "./listener";
-import { MessageBusConfig } from "./message-bus.config";
-import { ErrorHandlingEnum } from "../src/error-handling.enum";
 
 export class Hub {
         private hubName: string;
@@ -11,7 +10,7 @@ export class Hub {
         private broadcastListeners: Listener[];
 
         constructor(hubName: string,
-            private messageBusConfig: MessageBusConfig) {
+            private errorHanndling: ErrorHandlingEnum) {
             this.subscribers = [];
             this.listeners = [];
             this.broadcastListeners = [];
@@ -113,7 +112,7 @@ export class Hub {
                 try{
                 recipient.callback(message.payload);
                 }catch(e){
-                    switch(this.messageBusConfig.ErrorHandling){
+                    switch(this.errorHanndling){
                         case ErrorHandlingEnum.Log:
                             console.error(e);
                             break;

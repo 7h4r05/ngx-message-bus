@@ -1,3 +1,8 @@
+<a name="11.0.0"></a>
+## [11.0.0] (2021-01-10)
+
+* Updated dependencies to use Angular 11.x
+* Changed version to match Angular latest release
 <a name="7.0.0"></a>
 ## [7.0.0] (2018-07-14)
 

@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "dest": ".//dist/ngx-message-bus",
+  "lib": {
+    "entryFile": "./public-api.ts"
+  }
+}

@@ -1,7 +1,8 @@
 # ngx-message-bus
 
-> Message Bus for Angular 8+ for communication between components.
+> Message Bus for Angular 11+ for communication between components.
 
+For Angular version 8.x, you need to choose 8.0.0 version.
 For Angular version 7.x, you need to choose 7.0.0 version.
 For Angular version 6.x, you need to choose 3.0.0 version.
 For Angular versions before 6, you need to choose a 1.x version of this module.
@@ -15,20 +16,6 @@ Provides:
 - broadcasting messages within hubs
 
 ## Usage
-
-### Import Module
-Import module 
-
-```ts
-import  { MessageBusModule } from 'ngx-message-bus';
-
-@NgModule({
-    imports: [
-        //...,
-        MessageBusModule
-    ]
-})
-```
 
 ### Managing the connection
 
@@ -135,14 +122,11 @@ To broadcast a message simple data needs to be passed
 By default message bus will catch the exception and print it into the console. There's a possibility to consume the exception with no action (None) or to rethrow the exception.
 
 ```ts
-import  { MessageBusModule, ErrorHandlingEnum } from 'ngx-message-bus';
+import  { MessageBus, ErrorHandlingEnum } from 'ngx-message-bus';
 
-@NgModule({
-    imports: [
-        //...,
-        MessageBusModule.withConfig(ErrorHandlingEnum.Throw)
-    ]
-})
+constructor(private messageBus: MessageBus){
+        this.messageBus.setLogLevel(ErrorHandlingEnum.Throw);
+}
 ```
 
 When ErrorHandlingEnum is defined as

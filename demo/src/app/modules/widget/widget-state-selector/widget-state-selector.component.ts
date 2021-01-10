@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageBus, Connection, Message } from '../../../../../../public_api';
+import { MessageBus, Connection, Message } from '../../../../../../dist';
+
 import { IWidget} from '../iwidget.interface';
 
 

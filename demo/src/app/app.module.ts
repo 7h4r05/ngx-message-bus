@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WidgetModule } from './modules/widget/widget.module';
-import { MessageBusModule } from '../../../public_api';
+
 
 @NgModule({
   declarations: [
@@ -15,8 +15,7 @@ import { MessageBusModule } from '../../../public_api';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    WidgetModule,
-    MessageBusModule
+    WidgetModule
   ],
   bootstrap: [
     AppComponent

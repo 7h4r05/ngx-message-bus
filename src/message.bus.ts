@@ -1,25 +1,31 @@
+import { ErrorHandlingEnum } from './error-handling.enum';
 import { Connection } from "./connection";
 import { Hub } from "./hub";
-import { MessageBusConfig } from "./message-bus.config";
 import { Injectable } from "@angular/core";
 
 interface IMap {
     [hubName: string]: Hub;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MessageBus {
-
+    errorHandling = ErrorHandlingEnum.Log;
     private hubs: IMap;
 
-    constructor(private messageBusConfig: MessageBusConfig) {
+    constructor() {
         this.hubs = {};
+    }
+
+    setLogLevel(errorHandling: ErrorHandlingEnum) {
+        this.errorHandling = errorHandling;
     }
 
     connect(hubName: string, subscriberId: string):Connection {
         hubName = hubName.toString();
         if(!this.hubs[hubName] || this.hubs[hubName] === null) {
-            this.hubs[hubName] = new Hub(hubName, this.messageBusConfig);
+            this.hubs[hubName] = new Hub(hubName, this.errorHandling);
         }
         const hub: Hub = this.hubs[hubName];
         const connection: Connection = new Connection(hub, subscriberId);
