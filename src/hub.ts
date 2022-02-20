@@ -93,12 +93,15 @@ export class Hub {
             if(!this.isAnyListener() && message) {
                 return;
             }
+
+            const isMsgRecipientsValid = this.isRecipientsValid(message);
+            
             let recipients: Listener[] = this.listeners;
 
-            if(!message.recipientIds || message.recipientIds.indexOf(message.publisherId.toString()) < 0) {
+            if(!isMsgRecipientsValid || message.recipientIds.indexOf(message.publisherId.toString()) < 0) {
                 recipients = recipients.filter(l => l.subscriberId.toString() !== message.publisherId.toString());
             }
-            if(message.recipientIds && message.recipientIds.length > 0) {
+            if(isMsgRecipientsValid && message.recipientIds.length > 0) {
                 recipients = recipients.filter(sub => message.recipientIds.indexOf(sub.subscriberId.toString()) >= 0);
             }
             if(message.groupId && message.groupId.length > 0) {
@@ -141,6 +144,10 @@ export class Hub {
             this.broadcastListeners = null;
             this.hubName = null;
             this.listeners = null;
+        }
+
+        private isRecipientsValid<T>(message: Message<T>):boolean {
+            return message.recipientIds && message.recipientIds.length ? true : false;
         }
 
         private isAnyListener():boolean {
